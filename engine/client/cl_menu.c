@@ -131,20 +131,10 @@ qboolean UI_IsVisible( void )
 
 static void UI_DrawLogo( const char *filename, float x, float y, float width, float height )
 {
-	static float	cin_time;
-	static int	last_frame = -1;
-	byte		*cin_data = NULL;
-	movie_state_t	*cin_state;
-	int		cin_frame;
-	qboolean		redraw = false;
-
-	if( !menu.drawLogo ) return;
-	cin_state = AVI_GetState( CIN_LOGO );
-
-	if( !AVI_IsActive( cin_state ))
-	{
-		string		path;
-		const char	*fullpath;
+#ifdef USE_VFW
+	movie_state_t	*Avi;
+	string		path;
+	const char	*fullpath;
 	
 		// run cinematic if not
 		Q_snprintf( path, sizeof( path ), "media/%s", filename );
